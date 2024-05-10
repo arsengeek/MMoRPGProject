@@ -25,13 +25,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    
+    'MMoRPGapp',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    
+    'django_apscheduler',
     'ckeditor',
-    'MMoRPGapp'
 
 ]
 
@@ -44,11 +43,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.Authentication',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 ACCOUNT_EMAIL_REQUIRED = True
@@ -57,7 +58,7 @@ ACCOUNT_USERNAME_EMAIL = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_VERIFICATION = 'mandatory'
 
-LOGIN_REDIRECT_URL = '../../mmorpg/'
+LOGIN_REDIRECT_URL = '../../mmorpg/posts'
 
 ROOT_URLCONF = 'Bulletin_board.urls'
 
@@ -126,5 +127,31 @@ CKEDITOR_IMAGE_BACKEND = 'ckeditor_uploader.backend.PillowBackend'
 
 STATIC_URL = '/static/'
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yangex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TSL = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'xenor.lager@gmail.com'
+EMAIL_HOST_PASSWORD = 'Fantomas435'
+DEFAULT_FROM_EMAIL = 'xenor.lager@gmail.com' 
+SERVER_EMAIL = 'xenor.lager@gmail.com'  
+
+
+EMAIL_SUBJECT_PREFIX = ' '
+# ADMINS = [(
+#     'Ars', 'stalker.lager@gmail.com'
+# )]
+
+
+CACHES = {
+    'default' : {
+        'BACKEND' : 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION' : os.path.join(BASE_DIR, 'cache_files'),
+        'TIMEOUT' : 0,
+            
+    }
+} 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

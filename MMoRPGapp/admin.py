@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Advert, Categories, Responce
+from .models import Advert, Categories
 from modeltranslation.admin import TranslationAdmin
 
 class ProductAdmin(admin.ModelAdmin):
