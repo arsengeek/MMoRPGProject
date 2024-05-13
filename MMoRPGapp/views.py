@@ -13,7 +13,7 @@ class AdvertViews(ListView):
     ordering = ''
     template_name = 'listPost.html'
     context_object_name = 'posts'
-    paginate_by=100
+
 
 
 class AdvertCreate(LoginRequiredMixin, CreateView):
@@ -67,7 +67,7 @@ class CommetsSearch(LoginRequiredMixin, ListView):
     ordering = ''
     template_name = 'CommentsPost.html'
     context_object_name = 'comments'
-    paginate_by=10
+
 
     
     def get_context_data(self, **kwargs):

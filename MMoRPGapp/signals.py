@@ -6,7 +6,7 @@ from .models import Response, User
 
 
 @receiver(post_save,   sender=Response)
-def subscriptions_post_created(instance, created, **kwargs):
+def comment_created(instance, created, **kwargs):
     if not created:
         return
 
@@ -16,16 +16,17 @@ def subscriptions_post_created(instance, created, **kwargs):
     comment = instance.text
         
         
-    subject = f'New post: {instance.title}'
+    subject = f'New Comment:'
 
     text_content = (
-        f'New comment from {author.username}'
-        f'{comment}'
-        f'http://127.0.0.1:8000{instance.get_absolute_url()}'
+        f'New comment from {author.username}\n'
+        f'{comment}\n'
+        f'http://127.0.0.1:8000/mmorpg/comments/'
     )
     html_content = (
-        f'{instance.title}<br>'
-        f'<a href="http://127.0.0.1{instance.get_absolute_url()}">'
+        f'New comment from - {author.username}<br>'
+        f'---- {comment} ---- <br>'
+        f'http://127.0.0.1:8000/mmorpg/comments/'
     )
     
     msg = EmailMultiAlternatives(subject, text_content, None, [post_author.email])
