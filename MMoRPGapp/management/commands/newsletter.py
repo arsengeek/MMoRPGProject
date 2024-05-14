@@ -35,7 +35,7 @@ class Command(BaseCommand):
         
         scheduler.add_job(
             signals,
-            trigger=CronTrigger(minute="1"),
+            trigger=CronTrigger(second="*/10"),
             id="signals",
             max_instances=1,
             replace_existing=True,

@@ -8,6 +8,7 @@ class MmorpgappConfig(AppConfig):
         from . import signals
 
 
+
     default_app_config = 'MMoRPGapp.apps.MyAppConfig'
     
 
